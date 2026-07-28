@@ -1,26 +1,230 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Search Donor</title>
-    <link rel="stylesheet" href="style.css">
+<title>Search Donor</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#ffe6e6;
+text-align:center;
+}
+
+.container{
+
+width:400px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:50px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+
+}
+
+input,select{
+
+width:90%;
+padding:12px;
+margin:10px;
+
+}
+
+
+button{
+
+background:darkred;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:5px;
+
+}
+
+
+table{
+
+width:90%;
+margin:auto;
+background:white;
+border-collapse:collapse;
+
+}
+
+
+th{
+
+background:darkred;
+color:white;
+
+}
+
+
+td,th{
+
+padding:10px;
+border:1px solid gray;
+
+}
+
+
+</style>
+
 </head>
+
+
 <body>
+
+
+<div class="container">
 
 <h2>Search Donor</h2>
 
-<input type="text" id="searchLocation" placeholder="Enter Location">
 
-<select id="searchBlood">
-    <option>A+</option>
-    <option>B+</option>
-    <option>O+</option>
-    <option>AB+</option>
+<input type="text" id="location" placeholder="Enter District">
+
+
+<select id="blood">
+
+<option value="">Select Blood Group</option>
+
+<option>A+</option>
+<option>B+</option>
+<option>O+</option>
+<option>AB+</option>
+
+
 </select>
 
-<button onclick="searchDonor()">Search</button>
+
+<button onclick="searchDonor()">
+Search
+</button>
+
+
+</div>
+
+
 
 <div id="result"></div>
 
-<script src="script.js"></script>
+
+
+<script>
+
+
+function searchDonor(){
+
+
+let location =
+document.getElementById("location").value.toLowerCase();
+
+
+let blood =
+document.getElementById("blood").value;
+
+
+
+let donors =
+JSON.parse(localStorage.getItem("donors")) || [];
+
+
+
+let result =
+donors.filter(function(d){
+
+
+return d.district.toLowerCase().includes(location)
+&&
+d.bloodGroup == blood;
+
+
+});
+
+
+
+let html="";
+
+
+
+if(result.length==0){
+
+html="<h3>No Donor Found</h3>";
+
+}
+
+else{
+
+
+html=`
+
+<table>
+
+<tr>
+
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>Blood</th>
+<th>District</th>
+<th>Phone</th>
+
+
+</tr>
+
+
+`;
+
+
+
+result.forEach(function(d){
+
+
+html+=`
+
+<tr>
+
+<td>${d.name}</td>
+
+<td>${d.age}</td>
+
+<td>${d.gender}</td>
+
+<td>${d.bloodGroup}</td>
+
+<td>${d.district}</td>
+
+<td>${d.phone}</td>
+
+
+</tr>
+
+
+`;
+
+
+});
+
+
+html+="</table>";
+
+
+}
+
+
+
+document.getElementById("result").innerHTML=html;
+
+
+
+}
+
+
+</script>
+
+
 </body>
+
 </html>
