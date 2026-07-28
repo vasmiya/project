@@ -1,27 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register Donor</title>
+    <title>Donor Registration</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body{
+            font-family: Arial;
+            background: linear-gradient(to right, #ffcccc, #ffe6e6);
+            text-align:center;
+        }
+
+        .container{
+            width:400px;
+            margin:auto;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        input, select{
+            width:90%;
+            padding:10px;
+            margin:8px;
+            border-radius:5px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            padding:10px 20px;
+            margin:10px;
+            background:darkred;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:red;
+        }
+
+        h2{
+            color:darkred;
+        }
+    </style>
 </head>
+
 <body>
 
-<h2>Register Donor</h2>
+<div class="container">
+
+<h2>Blood Donor Registration</h2>
 
 <input type="text" id="name" placeholder="Enter Name">
-<input type="text" id="location" placeholder="Enter Location">
+<input type="number" id="age" placeholder="Enter Age">
+
+<select id="gender">
+    <option value="">Select Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+</select>
 
 <select id="blood">
+    <option value="">Select Blood Group</option>
     <option>A+</option>
     <option>B+</option>
     <option>O+</option>
     <option>AB+</option>
 </select>
 
+<input type="text" id="district" placeholder="Enter District">
+<input type="text" id="address" placeholder="Enter Address">
+<input type="text" id="phone" placeholder="Enter Phone Number">
+
+<br>
+
 <button onclick="registerDonor()">Register</button>
+<button onclick="clearForm()">Clear</button>
 
 <p id="msg"></p>
 
+</div>
+
 <script src="script.js"></script>
+
 </body>
 </html>
